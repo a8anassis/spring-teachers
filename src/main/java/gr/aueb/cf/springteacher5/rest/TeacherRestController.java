@@ -45,13 +45,24 @@ public class TeacherRestController {
 //        this.updateValidator = updateValidator;
 //    }
 
-    @Operation(summary = "Get teachers by their lastname starting with initials")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Teachers Found",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = TeacherReadOnlyDTO.class)) }),
-            @ApiResponse(responseCode = "400", description = "Invalid lastname supplied",
-                    content = @Content)})
+    @Operation(
+        summary = "Get teachers by their lastname starting with initials",
+        responses = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Teachers Found",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = TeacherReadOnlyDTO.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid lastname supplied",
+                    content = @Content
+            )
+        }
+    )
     @GetMapping("/teachers")
     public ResponseEntity<List<TeacherReadOnlyDTO>> getTeachersByLastname(@RequestParam("lastname") String lastname) {
         List<Teacher> teachers;
